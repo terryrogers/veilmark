@@ -1,0 +1,28 @@
+# Generated binaries and portable packages remain local release evidence.
+*.exe
+*.zip
+
+# Encrypted per-user test settings and other generated data.
+*.dat
+*.sha256
+
+# Intermediate and generated validation output.
+/work/
+/validation/
+/test-results.txt
+
+# Historical source and documentation are retained, but duplicate/generated
+# binary and raster artifacts inside the archive are not published.
+/archive/**/*.exe
+/archive/**/*.zip
+/archive/**/*.png
+/archive/**/*.ico
+
+# Common local tooling files.
+.vs/
+*.user
+*.suo
+*.tmp
+*.log
+Thumbs.db
+Desktop.ini

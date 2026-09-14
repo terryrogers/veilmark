@@ -1,0 +1,2 @@
+PASS: 68 synthetic checks. No real credentials used.
+Engine checks, output UI, stale-result protection, and window renders completed.
