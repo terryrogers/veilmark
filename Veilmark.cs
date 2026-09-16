@@ -467,8 +467,9 @@ namespace VeilmarkApp
             if (IsDisposed) return;
             bool maximized = windows.Maximized;
             inTray = false; ShowInTaskbar = true;
+            Show();
             WindowState = maximized ? FormWindowState.Maximized : FormWindowState.Normal;
-            Show(); Activate(); tray.Visible = false;
+            Activate(); tray.Visible = false;
             status.Text = "Restored from tray.";
         }
         private void CopyOutput()
