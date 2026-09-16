@@ -1,0 +1,283 @@
+title = "Veilmark Secret Checks"
+minVersion = "v8.30.0"
+
+[extend]
+path = "security/gitleaks-portable.toml"
+
+# Project exceptions are deliberately repetitive: every allowlist binds one
+# exact synthetic value to one exact reviewed file. No directory, wildcard,
+# neighboring value, real credential, or private publication identifier is
+# exempted.
+
+[[rules]]
+id = "generic-api-key"
+[[rules.allowlists]]
+description = "Synthetic redaction fixture in Veilmark.cs"
+condition = "AND"
+paths = ['''^Veilmark\.cs$''']
+regexTarget = "secret"
+regexes = ['''^(?:synthetic_Secret91|copy_guard_synthetic_secret|synthetic_ui_secret|old_synthetic_value|new_synthetic_value|secret_synthetic)$''']
+[[rules.allowlists]]
+description = "Synthetic redaction fixture in archive/TextRedactor/TextRedactor.cs"
+condition = "AND"
+paths = ['''^archive/TextRedactor/TextRedactor\.cs$''']
+regexTarget = "secret"
+regexes = ['''^(?:synthetic_Secret91|synthetic_ui_secret|old_synthetic_value|new_synthetic_value|secret_synthetic)$''']
+[[rules.allowlists]]
+description = "Synthetic redaction fixture in archive/Veilmark/Veilmark.cs"
+condition = "AND"
+paths = ['''^archive/Veilmark/Veilmark\.cs$''']
+regexTarget = "secret"
+regexes = ['''^(?:synthetic_Secret91|synthetic_ui_secret|old_synthetic_value|new_synthetic_value|secret_synthetic)$''']
+[[rules.allowlists]]
+description = "Synthetic redaction fixture in archive/Veilmark-1.1.1/Veilmark.cs"
+condition = "AND"
+paths = ['''^archive/Veilmark-1\.1\.1/Veilmark\.cs$''']
+regexTarget = "secret"
+regexes = ['''^(?:synthetic_Secret91|synthetic_ui_secret|old_synthetic_value|new_synthetic_value|secret_synthetic)$''']
+[[rules.allowlists]]
+description = "Synthetic redaction fixture in archive/Veilmark-1.2.0/Veilmark.cs"
+condition = "AND"
+paths = ['''^archive/Veilmark-1\.2\.0/Veilmark\.cs$''']
+regexTarget = "secret"
+regexes = ['''^(?:synthetic_Secret91|synthetic_ui_secret|old_synthetic_value|new_synthetic_value|secret_synthetic)$''']
+[[rules.allowlists]]
+description = "Synthetic redaction fixture in archive/Veilmark-1.2.1/Veilmark.cs"
+condition = "AND"
+paths = ['''^archive/Veilmark-1\.2\.1/Veilmark\.cs$''']
+regexTarget = "secret"
+regexes = ['''^(?:synthetic_Secret91|synthetic_ui_secret|old_synthetic_value|new_synthetic_value|secret_synthetic)$''']
+
+[[rules]]
+id = "portable-connection-string-password"
+[[rules.allowlists]]
+description = "Synthetic redaction fixture in Veilmark.cs"
+condition = "AND"
+paths = ['''^Veilmark\.cs$''']
+regexTarget = "secret"
+regexes = ['''^(?:synthetic_Secret91|copy_guard_synthetic_secret|synthetic_ui_secret|old_synthetic_value|new_synthetic_value|secret_synthetic)$''']
+[[rules.allowlists]]
+description = "Synthetic redaction fixture in archive/TextRedactor/TextRedactor.cs"
+condition = "AND"
+paths = ['''^archive/TextRedactor/TextRedactor\.cs$''']
+regexTarget = "secret"
+regexes = ['''^(?:synthetic_Secret91|synthetic_ui_secret|old_synthetic_value|new_synthetic_value|secret_synthetic)$''']
+[[rules.allowlists]]
+description = "Synthetic redaction fixture in archive/Veilmark/Veilmark.cs"
+condition = "AND"
+paths = ['''^archive/Veilmark/Veilmark\.cs$''']
+regexTarget = "secret"
+regexes = ['''^(?:synthetic_Secret91|synthetic_ui_secret|old_synthetic_value|new_synthetic_value|secret_synthetic)$''']
+[[rules.allowlists]]
+description = "Synthetic redaction fixture in archive/Veilmark-1.1.1/Veilmark.cs"
+condition = "AND"
+paths = ['''^archive/Veilmark-1\.1\.1/Veilmark\.cs$''']
+regexTarget = "secret"
+regexes = ['''^(?:synthetic_Secret91|synthetic_ui_secret|old_synthetic_value|new_synthetic_value|secret_synthetic)$''']
+[[rules.allowlists]]
+description = "Synthetic redaction fixture in archive/Veilmark-1.2.0/Veilmark.cs"
+condition = "AND"
+paths = ['''^archive/Veilmark-1\.2\.0/Veilmark\.cs$''']
+regexTarget = "secret"
+regexes = ['''^(?:synthetic_Secret91|synthetic_ui_secret|old_synthetic_value|new_synthetic_value|secret_synthetic)$''']
+[[rules.allowlists]]
+description = "Synthetic redaction fixture in archive/Veilmark-1.2.1/Veilmark.cs"
+condition = "AND"
+paths = ['''^archive/Veilmark-1\.2\.1/Veilmark\.cs$''']
+regexTarget = "secret"
+regexes = ['''^(?:synthetic_Secret91|synthetic_ui_secret|old_synthetic_value|new_synthetic_value|secret_synthetic)$''']
+
+[[rules]]
+id = "portable-credentialed-uri"
+[[rules.allowlists]]
+description = "Synthetic credentialed-URI fixture in Veilmark.cs"
+condition = "AND"
+paths = ['''^Veilmark\.cs$''']
+regexTarget = "secret"
+regexes = ['''^synthetic_Secret91$''']
+[[rules.allowlists]]
+description = "Synthetic credentialed-URI fixture in archive/TextRedactor/TextRedactor.cs"
+condition = "AND"
+paths = ['''^archive/TextRedactor/TextRedactor\.cs$''']
+regexTarget = "secret"
+regexes = ['''^synthetic_Secret91$''']
+[[rules.allowlists]]
+description = "Synthetic credentialed-URI fixture in archive/Veilmark/Veilmark.cs"
+condition = "AND"
+paths = ['''^archive/Veilmark/Veilmark\.cs$''']
+regexTarget = "secret"
+regexes = ['''^synthetic_Secret91$''']
+[[rules.allowlists]]
+description = "Synthetic credentialed-URI fixture in archive/Veilmark-1.1.1/Veilmark.cs"
+condition = "AND"
+paths = ['''^archive/Veilmark-1\.1\.1/Veilmark\.cs$''']
+regexTarget = "secret"
+regexes = ['''^synthetic_Secret91$''']
+[[rules.allowlists]]
+description = "Synthetic credentialed-URI fixture in archive/Veilmark-1.2.0/Veilmark.cs"
+condition = "AND"
+paths = ['''^archive/Veilmark-1\.2\.0/Veilmark\.cs$''']
+regexTarget = "secret"
+regexes = ['''^synthetic_Secret91$''']
+[[rules.allowlists]]
+description = "Synthetic credentialed-URI fixture in archive/Veilmark-1.2.1/Veilmark.cs"
+condition = "AND"
+paths = ['''^archive/Veilmark-1\.2\.1/Veilmark\.cs$''']
+regexTarget = "secret"
+regexes = ['''^synthetic_Secret91$''']
+
+[[rules]]
+id = "portable-authorization-header"
+[[rules.allowlists]]
+description = "Synthetic authorization-header fixture in Veilmark.cs"
+condition = "AND"
+paths = ['''^Veilmark\.cs$''']
+regexTarget = "secret"
+regexes = ['''^synthetic_Secret91$''']
+[[rules.allowlists]]
+description = "Synthetic authorization-header fixture in archive/TextRedactor/TextRedactor.cs"
+condition = "AND"
+paths = ['''^archive/TextRedactor/TextRedactor\.cs$''']
+regexTarget = "secret"
+regexes = ['''^synthetic_Secret91$''']
+[[rules.allowlists]]
+description = "Synthetic authorization-header fixture in archive/Veilmark/Veilmark.cs"
+condition = "AND"
+paths = ['''^archive/Veilmark/Veilmark\.cs$''']
+regexTarget = "secret"
+regexes = ['''^synthetic_Secret91$''']
+[[rules.allowlists]]
+description = "Synthetic authorization-header fixture in archive/Veilmark-1.1.1/Veilmark.cs"
+condition = "AND"
+paths = ['''^archive/Veilmark-1\.1\.1/Veilmark\.cs$''']
+regexTarget = "secret"
+regexes = ['''^synthetic_Secret91$''']
+[[rules.allowlists]]
+description = "Synthetic authorization-header fixture in archive/Veilmark-1.2.0/Veilmark.cs"
+condition = "AND"
+paths = ['''^archive/Veilmark-1\.2\.0/Veilmark\.cs$''']
+regexTarget = "secret"
+regexes = ['''^synthetic_Secret91$''']
+[[rules.allowlists]]
+description = "Synthetic authorization-header fixture in archive/Veilmark-1.2.1/Veilmark.cs"
+condition = "AND"
+paths = ['''^archive/Veilmark-1\.2\.1/Veilmark\.cs$''']
+regexTarget = "secret"
+regexes = ['''^synthetic_Secret91$''']
+
+[[rules]]
+id = "portable-client-secret"
+[[rules.allowlists]]
+description = "Synthetic client-secret fixture in Veilmark.cs"
+condition = "AND"
+paths = ['''^Veilmark\.cs$''']
+regexTarget = "secret"
+regexes = ['''^synthetic_Secret91$''']
+[[rules.allowlists]]
+description = "Synthetic client-secret fixture in archive/TextRedactor/TextRedactor.cs"
+condition = "AND"
+paths = ['''^archive/TextRedactor/TextRedactor\.cs$''']
+regexTarget = "secret"
+regexes = ['''^synthetic_Secret91$''']
+[[rules.allowlists]]
+description = "Synthetic client-secret fixture in archive/Veilmark/Veilmark.cs"
+condition = "AND"
+paths = ['''^archive/Veilmark/Veilmark\.cs$''']
+regexTarget = "secret"
+regexes = ['''^synthetic_Secret91$''']
+[[rules.allowlists]]
+description = "Synthetic client-secret fixture in archive/Veilmark-1.1.1/Veilmark.cs"
+condition = "AND"
+paths = ['''^archive/Veilmark-1\.1\.1/Veilmark\.cs$''']
+regexTarget = "secret"
+regexes = ['''^synthetic_Secret91$''']
+[[rules.allowlists]]
+description = "Synthetic client-secret fixture in archive/Veilmark-1.2.0/Veilmark.cs"
+condition = "AND"
+paths = ['''^archive/Veilmark-1\.2\.0/Veilmark\.cs$''']
+regexTarget = "secret"
+regexes = ['''^synthetic_Secret91$''']
+[[rules.allowlists]]
+description = "Synthetic client-secret fixture in archive/Veilmark-1.2.1/Veilmark.cs"
+condition = "AND"
+paths = ['''^archive/Veilmark-1\.2\.1/Veilmark\.cs$''']
+regexTarget = "secret"
+regexes = ['''^synthetic_Secret91$''']
+
+[[rules]]
+id = "jwt"
+[[rules.allowlists]]
+description = "Synthetic JWT fixture in Veilmark.cs"
+condition = "AND"
+paths = ['''^Veilmark\.cs$''']
+regexTarget = "secret"
+regexes = ['''^eyJhbGciOiJIUzI1NiJ9\.eyJzdWIiOiJkZW1vIn0\.c3ludGhldGlj$''']
+[[rules.allowlists]]
+description = "Synthetic JWT fixture in archive/TextRedactor/TextRedactor.cs"
+condition = "AND"
+paths = ['''^archive/TextRedactor/TextRedactor\.cs$''']
+regexTarget = "secret"
+regexes = ['''^eyJhbGciOiJIUzI1NiJ9\.eyJzdWIiOiJkZW1vIn0\.c3ludGhldGlj$''']
+[[rules.allowlists]]
+description = "Synthetic JWT fixture in archive/Veilmark/Veilmark.cs"
+condition = "AND"
+paths = ['''^archive/Veilmark/Veilmark\.cs$''']
+regexTarget = "secret"
+regexes = ['''^eyJhbGciOiJIUzI1NiJ9\.eyJzdWIiOiJkZW1vIn0\.c3ludGhldGlj$''']
+[[rules.allowlists]]
+description = "Synthetic JWT fixture in archive/Veilmark-1.1.1/Veilmark.cs"
+condition = "AND"
+paths = ['''^archive/Veilmark-1\.1\.1/Veilmark\.cs$''']
+regexTarget = "secret"
+regexes = ['''^eyJhbGciOiJIUzI1NiJ9\.eyJzdWIiOiJkZW1vIn0\.c3ludGhldGlj$''']
+[[rules.allowlists]]
+description = "Synthetic JWT fixture in archive/Veilmark-1.2.0/Veilmark.cs"
+condition = "AND"
+paths = ['''^archive/Veilmark-1\.2\.0/Veilmark\.cs$''']
+regexTarget = "secret"
+regexes = ['''^eyJhbGciOiJIUzI1NiJ9\.eyJzdWIiOiJkZW1vIn0\.c3ludGhldGlj$''']
+[[rules.allowlists]]
+description = "Synthetic JWT fixture in archive/Veilmark-1.2.1/Veilmark.cs"
+condition = "AND"
+paths = ['''^archive/Veilmark-1\.2\.1/Veilmark\.cs$''']
+regexTarget = "secret"
+regexes = ['''^eyJhbGciOiJIUzI1NiJ9\.eyJzdWIiOiJkZW1vIn0\.c3ludGhldGlj$''']
+
+[[rules]]
+id = "private-key"
+[[rules.allowlists]]
+description = "Synthetic multiline scanner fixture in Veilmark.cs"
+condition = "AND"
+paths = ['''^Veilmark\.cs$''']
+regexTarget = "secret"
+regexes = ['''^-----BEGIN PGP PRIVATE KEY BLOCK-----\\nSYNTHETICBLOCK\\n-----END PGP PRIVATE KEY BLOCK-----"\)\.Text == "\[REDACTED_ENCRYPTION_KEY\]", "Multiline PGP"\);\r?\n            Check\(RunText\("-----BEGIN OPENSSH PRIVATE KEY-----$''']
+[[rules.allowlists]]
+description = "Synthetic multiline scanner fixture in archive/TextRedactor/TextRedactor.cs"
+condition = "AND"
+paths = ['''^archive/TextRedactor/TextRedactor\.cs$''']
+regexTarget = "secret"
+regexes = ['''^-----BEGIN PGP PRIVATE KEY BLOCK-----\\nSYNTHETICBLOCK\\n-----END PGP PRIVATE KEY BLOCK-----"\)\.Text == "\[REDACTED_ENCRYPTION_KEY\]", "Multiline PGP"\);\r?\n            Check\(RunText\("-----BEGIN OPENSSH PRIVATE KEY-----$''']
+[[rules.allowlists]]
+description = "Synthetic multiline scanner fixture in archive/Veilmark/Veilmark.cs"
+condition = "AND"
+paths = ['''^archive/Veilmark/Veilmark\.cs$''']
+regexTarget = "secret"
+regexes = ['''^-----BEGIN PGP PRIVATE KEY BLOCK-----\\nSYNTHETICBLOCK\\n-----END PGP PRIVATE KEY BLOCK-----"\)\.Text == "\[REDACTED_ENCRYPTION_KEY\]", "Multiline PGP"\);\r?\n            Check\(RunText\("-----BEGIN OPENSSH PRIVATE KEY-----$''']
+[[rules.allowlists]]
+description = "Synthetic multiline scanner fixture in archive/Veilmark-1.1.1/Veilmark.cs"
+condition = "AND"
+paths = ['''^archive/Veilmark-1\.1\.1/Veilmark\.cs$''']
+regexTarget = "secret"
+regexes = ['''^-----BEGIN PGP PRIVATE KEY BLOCK-----\\nSYNTHETICBLOCK\\n-----END PGP PRIVATE KEY BLOCK-----"\)\.Text == "\[REDACTED_ENCRYPTION_KEY\]", "Multiline PGP"\);\r?\n            Check\(RunText\("-----BEGIN OPENSSH PRIVATE KEY-----$''']
+[[rules.allowlists]]
+description = "Synthetic multiline scanner fixture in archive/Veilmark-1.2.0/Veilmark.cs"
+condition = "AND"
+paths = ['''^archive/Veilmark-1\.2\.0/Veilmark\.cs$''']
+regexTarget = "secret"
+regexes = ['''^-----BEGIN PGP PRIVATE KEY BLOCK-----\\nSYNTHETICBLOCK\\n-----END PGP PRIVATE KEY BLOCK-----"\)\.Text == "\[REDACTED_ENCRYPTION_KEY\]", "Multiline PGP"\);\r?\n            Check\(RunText\("-----BEGIN OPENSSH PRIVATE KEY-----$''']
+[[rules.allowlists]]
+description = "Synthetic multiline scanner fixture in archive/Veilmark-1.2.1/Veilmark.cs"
+condition = "AND"
+paths = ['''^archive/Veilmark-1\.2\.1/Veilmark\.cs$''']
+regexTarget = "secret"
+regexes = ['''^-----BEGIN PGP PRIVATE KEY BLOCK-----\\nSYNTHETICBLOCK\\n-----END PGP PRIVATE KEY BLOCK-----"\)\.Text == "\[REDACTED_ENCRYPTION_KEY\]", "Multiline PGP"\);\r?\n            Check\(RunText\("-----BEGIN OPENSSH PRIVATE KEY-----$''']

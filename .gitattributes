@@ -1,0 +1,5 @@
+# Git for Windows must preserve executable hook interpreter lines.
+.githooks/* text eol=lf
+*.ps1 text eol=crlf
+*.yml text eol=lf
+*.toml text eol=lf

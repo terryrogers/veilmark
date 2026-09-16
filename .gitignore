@@ -26,3 +26,6 @@
 *.log
 Thumbs.db
 Desktop.ini
+
+# Verified local security tooling; never package or publish it.
+/.tools/

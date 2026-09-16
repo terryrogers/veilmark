@@ -1,0 +1,59 @@
+name: Security And Quality
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+  schedule:
+    - cron: '23 7 * * 1'
+
+permissions:
+  contents: read
+
+jobs:
+  secrets:
+    name: Secret Scan
+    runs-on: windows-2025
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Install Verified Scanner
+        shell: powershell
+        run: .\scripts\Install-Gitleaks.ps1
+      - name: Scan Full History
+        shell: powershell
+        run: .\scripts\Test-Secrets.ps1 -Mode History
+      - name: Test Detection Policy
+        shell: powershell
+        run: .\scripts\Test-DetectionPolicy.ps1
+      - name: Verify Local Safeguards
+        shell: powershell
+        run: .\scripts\Test-Baseline.ps1
+
+  build-test:
+    name: Clean Build And Tests
+    runs-on: windows-2025
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Build And Test Fresh Executable
+        shell: powershell
+        run: .\scripts\Test-CI.ps1
+
+  dependency-review:
+    name: Dependency Review
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/dependency-review-action@a1d282b36b6f3519aa1f3fc636f609c47dddb294 # v5.0.0
+        with:
+          fail-on-severity: low
+          fail-on-scopes: runtime, development, unknown
+          comment-summary-in-pr: never
+          show-openssf-scorecard: false
