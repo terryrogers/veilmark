@@ -1,0 +1,26 @@
+{
+    "schemaVersion":  1,
+    "templateVersion":  "0.1.0-dev",
+    "modules":  [
+                    "powershell",
+                    "documentation"
+                ],
+    "preservedModules":  [
+                             "secret-scanning"
+                         ],
+    "files":  [
+                  {
+                      "path":  ".github/workflows/quality-documentation.yml",
+                      "module":  "documentation",
+                      "sha256":  "f05a230adf71b3867b3607c983653274b5f8bc336e4555fbaf5cdcb6f0de45c3"
+                  },
+                  {
+                      "path":  ".github/workflows/quality-powershell.yml",
+                      "module":  "powershell",
+                      "sha256":  "a21235f8a464b09cfcbed5521d3662924ebc84748842a55df3ab2e808e49bb70"
+                  }
+              ],
+    "gitIgnoreLines":  [
+
+                       ]
+}
