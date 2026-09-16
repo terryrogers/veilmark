@@ -120,3 +120,8 @@ try {
         Remove-Item -LiteralPath $scratchFull -Recurse -Force
     }
 }
+
+# Expected positive fixtures make Gitleaks return 1 during this test suite.
+# Prevent that handled native exit code from becoming the script's process exit
+# code after every assertion has passed.
+exit 0

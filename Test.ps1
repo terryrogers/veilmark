@@ -7,7 +7,10 @@ New-Item -ItemType Directory -Force -Path $ReportFolder | Out-Null
 $report = Join-Path $ReportFolder 'test-results.txt'
 if (Test-Path -LiteralPath $report) { Remove-Item -LiteralPath $report -Force }
 $testProcess = Start-Process -FilePath $app -ArgumentList @('--self-test', ('"' + $ReportFolder + '"')) -WindowStyle Hidden -PassThru -Wait
-if ($testProcess.ExitCode -ne 0) { throw 'Self-test failed. See test-results.txt.' }
+if ($testProcess.ExitCode -ne 0) {
+    if (Test-Path -LiteralPath $report) { Write-Host (Get-Content -LiteralPath $report -Raw) }
+    throw 'Self-test failed. See the report above.'
+}
 if (-not (Test-Path -LiteralPath $report)) { throw 'Self-test did not create a fresh report.' }
 $result = Get-Content -LiteralPath $report -Raw
 Write-Host $result

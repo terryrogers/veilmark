@@ -754,21 +754,34 @@ namespace VeilmarkApp
         }
         private static string StatusText(MainForm form) { return Descendants(form).OfType<StatusStrip>().Single().Items["ActivityStatus"].Text; }
         private static NotifyIcon TrayIcon(MainForm form) { return (NotifyIcon)typeof(MainForm).GetField("tray", BindingFlags.Instance | BindingFlags.NonPublic).GetValue(form); }
+        private static bool WaitFor(Func<bool> condition, int timeoutMilliseconds = 3000)
+        {
+            DateTime deadline = DateTime.UtcNow.AddMilliseconds(timeoutMilliseconds);
+            do
+            {
+                Application.DoEvents();
+                if (condition()) return true;
+                Thread.Sleep(20);
+            }
+            while (DateTime.UtcNow < deadline);
+            Application.DoEvents();
+            return condition();
+        }
         private static void TrayTests(MainForm form)
         {
             Rectangle originalBounds = form.Bounds;
             string originalInput = form.Input.Text, originalOutput = form.Output.Text;
             NotifyIcon tray = TrayIcon(form);
-            form.WindowState = FormWindowState.Minimized; Application.DoEvents();
-            Check(!form.Visible && !form.ShowInTaskbar && tray.Visible, "Minimise hides window and shows tray icon");
+            form.WindowState = FormWindowState.Minimized;
+            Check(WaitFor(() => !form.Visible && !form.ShowInTaskbar && tray.Visible), "Minimise hides window and shows tray icon");
             Check(form.Input.Text == originalInput && form.Output.Text == originalOutput, "Minimise preserves current text");
-            ((ToolStripMenuItem)tray.ContextMenuStrip.Items["Open"]).PerformClick(); Application.DoEvents();
-            Check(form.Visible && form.ShowInTaskbar && form.WindowState == FormWindowState.Normal && !tray.Visible, "Tray Open restores normal window");
-            form.WindowState = FormWindowState.Maximized; Application.DoEvents();
-            form.WindowState = FormWindowState.Minimized; Application.DoEvents();
+            ((ToolStripMenuItem)tray.ContextMenuStrip.Items["Open"]).PerformClick();
+            Check(WaitFor(() => form.Visible && form.ShowInTaskbar && form.WindowState == FormWindowState.Normal && !tray.Visible), "Tray Open restores normal window");
+            form.WindowState = FormWindowState.Maximized; WaitFor(() => form.WindowState == FormWindowState.Maximized);
+            form.WindowState = FormWindowState.Minimized;
+            Check(WaitFor(() => !form.Visible && tray.Visible), "Maximized window minimises to tray");
             typeof(NotifyIcon).GetMethod("OnDoubleClick", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(tray, new object[] { EventArgs.Empty });
-            Application.DoEvents();
-            Check(form.Visible && form.WindowState == FormWindowState.Maximized && !tray.Visible, "Tray double-click restores maximized window");
+            Check(WaitFor(() => form.Visible && form.WindowState == FormWindowState.Maximized && !tray.Visible), "Tray double-click restores maximized window");
             form.WindowState = FormWindowState.Normal; form.Bounds = originalBounds; Application.DoEvents();
         }
         private static void ClickOnHeader(DataGridView grid)
@@ -1014,8 +1027,8 @@ namespace VeilmarkApp
                         NotifyIcon notify = TrayIcon(reopened);
                         reopened.WindowState = FormWindowState.Minimized; Application.DoEvents();
                         Check(notify.Visible && !reopened.Visible, "Quit test begins minimized in tray");
-                        ((ToolStripMenuItem)notify.ContextMenuStrip.Items["Quit"]).PerformClick(); Application.DoEvents();
-                        Check(reopened.IsDisposed && !notify.Visible, "Tray Quit closes app and removes tray icon");
+                        ((ToolStripMenuItem)notify.ContextMenuStrip.Items["Quit"]).PerformClick();
+                        Check(WaitFor(() => reopened.IsDisposed && !notify.Visible), "Tray Quit closes app and removes tray icon");
                     }
                     var probe = new System.Diagnostics.ProcessStartInfo(Application.ExecutablePath, "--verify-persistence \"" + testSettingsPath + "\"") { UseShellExecute = false, CreateNoWindow = true, WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden };
                     using (var child = System.Diagnostics.Process.Start(probe))
