@@ -754,6 +754,10 @@ namespace VeilmarkApp
         }
         private static string StatusText(MainForm form) { return Descendants(form).OfType<StatusStrip>().Single().Items["ActivityStatus"].Text; }
         private static NotifyIcon TrayIcon(MainForm form) { return (NotifyIcon)typeof(MainForm).GetField("tray", BindingFlags.Instance | BindingFlags.NonPublic).GetValue(form); }
+        private static void ClickToolStripItem(ToolStripItem item)
+        {
+            typeof(ToolStripItem).GetMethod("OnClick", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(item, new object[] { EventArgs.Empty });
+        }
         private static bool WaitFor(Func<bool> condition, int timeoutMilliseconds = 3000)
         {
             DateTime deadline = DateTime.UtcNow.AddMilliseconds(timeoutMilliseconds);
@@ -775,8 +779,9 @@ namespace VeilmarkApp
             form.WindowState = FormWindowState.Minimized;
             Check(WaitFor(() => !form.Visible && !form.ShowInTaskbar && tray.Visible), "Minimise hides window and shows tray icon");
             Check(form.Input.Text == originalInput && form.Output.Text == originalOutput, "Minimise preserves current text");
-            ((ToolStripMenuItem)tray.ContextMenuStrip.Items["Open"]).PerformClick();
-            Check(WaitFor(() => form.Visible && form.ShowInTaskbar && form.WindowState == FormWindowState.Normal && !tray.Visible), "Tray Open restores normal window");
+            ClickToolStripItem(tray.ContextMenuStrip.Items["Open"]);
+            bool restored = WaitFor(() => form.Visible && form.ShowInTaskbar && form.WindowState == FormWindowState.Normal && !tray.Visible);
+            Check(restored, string.Format("Tray Open restores normal window (Visible={0}, ShowInTaskbar={1}, WindowState={2}, TrayVisible={3})", form.Visible, form.ShowInTaskbar, form.WindowState, tray.Visible));
             form.WindowState = FormWindowState.Maximized; WaitFor(() => form.WindowState == FormWindowState.Maximized);
             form.WindowState = FormWindowState.Minimized;
             Check(WaitFor(() => !form.Visible && tray.Visible), "Maximized window minimises to tray");

@@ -94,3 +94,4 @@ try {
         Remove-Item -LiteralPath $scratch -Recurse -Force
     }
 }
+exit 0
