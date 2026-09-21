@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "automaticEnrollment": true,
+  "modules": {
+    "include": [],
+    "repositoryOwned": [
+      "powershell"
+    ]
+  },
+  "paths": {
+    "repositoryOwned": [
+      ".gitleaks.toml",
+      "scripts/Test-Secrets.ps1"
+    ]
+  },
+  "secretScanning": {
+    "additionalConfigFiles": []
+  }
+}

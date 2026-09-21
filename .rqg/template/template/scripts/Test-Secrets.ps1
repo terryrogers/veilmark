@@ -91,7 +91,7 @@ function Invoke-PolicyScan {
         [string]$Location,
         [string]$FailureMessage
     )
-    Push-Location -LiteralPath $Location
+    Push-Location $Location
     try {
         foreach ($policy in $policyConfigs) {
             $scannerArguments = @(
