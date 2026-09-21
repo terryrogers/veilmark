@@ -5,7 +5,6 @@
     "documentation",
     "licensing",
     "module-drift",
-    "powershell",
     "secret-scanning"
   ],
   "preservedModules": [
@@ -241,16 +240,6 @@
       "path": "security/gitleaks-portable.toml",
       "module": "secret-scanning",
       "sha256": "0c0c21059ee3408c98003ba472961e89876ea5d984e5a5fea8d456a50aa24045"
-    },
-    {
-      "path": "scripts/Test-Secrets.ps1",
-      "module": "secret-scanning",
-      "sha256": "1f9c235dd1e37ca34436842f6db83a5f4424b4af9d580f699417b9b3dccf08d1"
-    },
-    {
-      "path": ".github/workflows/quality-powershell.yml",
-      "module": "powershell",
-      "sha256": "a21235f8a464b09cfcbed5521d3662924ebc84748842a55df3ab2e808e49bb70"
     }
   ],
   "gitIgnoreLines": [
