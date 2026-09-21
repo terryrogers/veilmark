@@ -10,6 +10,7 @@
   "paths": {
     "repositoryOwned": [
       ".gitleaks.toml",
+      ".github/workflows/quality-powershell.yml",
       "scripts/Test-Secrets.ps1"
     ]
   },
