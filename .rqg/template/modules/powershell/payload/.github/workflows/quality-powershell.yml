@@ -11,7 +11,7 @@ permissions:
 jobs:
   validation:
     name: PowerShell And Regression Tests
-    runs-on: windows-2025
+    runs-on: ${{ fromJSON(((github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name != github.repository) || !github.event.repository.private) && '["windows-2025"]' || (vars.RQG_WINDOWS_RUNS_ON || '["windows-2025"]')) }}
     timeout-minutes: 20
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
@@ -32,8 +32,10 @@ jobs:
           }
           if ($errors) { $errors | Format-List | Out-String | Write-Error; exit 1 }
       - name: Run Synthetic Deployment Tests
+        if: ${{ hashFiles('tests/Invoke-RepositoryQualityGates.Tests.ps1') != '' }}
         shell: pwsh
         run: ./tests/Invoke-RepositoryQualityGates.Tests.ps1
       - name: Run Automatic Update Tests
+        if: ${{ hashFiles('tests/Update-RepositoryQualityGates.Tests.ps1') != '' }}
         shell: pwsh
         run: ./tests/Update-RepositoryQualityGates.Tests.ps1
