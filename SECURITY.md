@@ -1,3 +1,5 @@
+<!-- repository-standard: schema=1; standard=Repository Standards; version=1.0.0; owner=terryrogers; source=local; scope=local-override; override=local-file; overrides=https://github.com/terryrogers/.github/blob/main/SECURITY.md -->
+
 # Security Policy
 
 ## Supported Versions
