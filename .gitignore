@@ -29,3 +29,10 @@ Desktop.ini
 
 # Verified local security tooling; never package or publish it.
 /.tools/
+
+# Private project lifecycle records
+PROJECT.md
+GOALS.md
+STATUS.md
+DECISIONS.md
+HANDOFFS.md
