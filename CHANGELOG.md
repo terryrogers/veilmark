@@ -4,6 +4,12 @@ This changelog reconstructs the available local evidence. Dates are artifact tim
 
 ## Unreleased
 
+### Changed
+
+- Refresh centrally managed Repository Quality Gates files to 3.2.0 while preserving repository-owned modules, paths, & licence decisions.
+- Replace the retired automaticEnrollment setting with rqgEnabled without changing enrollment intent.
+
+
 - Added reconstructed project documentation and source-control records.
 - Added project history, architecture, development, release-evidence, security and roadmap documentation.
 - Prepared the source tree for its first reviewed Git commit while leaving generated binaries and local release packages untracked.
