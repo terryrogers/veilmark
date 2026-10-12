@@ -6,6 +6,8 @@ This changelog reconstructs the available local evidence. Dates are artifact tim
 
 ### Changed
 
+- Align the repository support route with the current GitHub Issues requirement (#27).
+
 - Refresh centrally managed Repository Quality Gates files to 3.2.0 while preserving repository-owned modules, paths, & licence decisions.
 - Replace the retired automaticEnrollment setting with rqgEnabled without changing enrollment intent.
 
