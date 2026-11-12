@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "automaticEnrollment": true,
+  "rqgEnabled": true,
   "modules": {
     "include": [],
     "repositoryOwned": [
